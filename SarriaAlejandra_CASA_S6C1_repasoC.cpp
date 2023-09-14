@@ -29,14 +29,15 @@ int minimum(int arreglo[], int N){ //La función recibe el arreglo y su tamaño
 //11.0
 void odd(int arreglo[], int N){  //Esta función no tiene que retornar algo, solo cumplir la instrucción, por lo que es tipo void
   for(int i = 0; i < N; i++){
+
+    if(arreglo[i] > 800){  //Si el número es mayor a 800, se rompe el ciclo
+      break;
+    }
     if(arreglo[i] % 2 != 0){  //Para verificar que los números sean impares
 
       cout << arreglo[i] << "\n";  //En caso de que lo sean,, imprimirlos
     }
 
-    if(arreglo[i] > 800){  //Si el número es mayor a 800, se rompe el ciclo
-      break;
-    }
   }
 }
 
@@ -83,7 +84,8 @@ int main(){
    cout << minimum(arreglo, N) <<"\n"; //Tando a minimum como a odd les pongo los parámetros necesarios para que trabajen sobre mi arreglo previamente hecho
 
 //11.1
-   cout << odd(arreglo, N) <<"\n";
+   
+   odd(arreglo, N);
    
  return 0;
      
