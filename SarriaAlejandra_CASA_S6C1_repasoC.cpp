@@ -4,13 +4,13 @@
 #include <cmath>  //La necesito para usar la función pow()
 using namespace std;
 
-//8.
+//8. Hacer una función que eleve al exponente
 float pow_func(float mivarflotante, int mivarentera){ //Defino la función al inicio, antes de mi función main
 
   return pow(mivarflotante, mivarentera);
 }
 
-//10.0
+//10.0 Hacer una función que retorne el mínimo del arreglo antes creado 
 int minimum(int arreglo[], int N){ //La función recibe el arreglo y su tamaño
 
   int min = arreglo[0]; //supongo que el mínimo inicialmente es el primer valor del arreglo 
@@ -26,7 +26,7 @@ int minimum(int arreglo[], int N){ //La función recibe el arreglo y su tamaño
   return min; //un error que cometí fue poner el return dentro del for, así no funcionaba la iteración, el return debe ir fuera del for al finalizar la función
 }
 
-//11.0
+//11.0 Hacer una función que retorne los impares menores a 800 del arreglo e imprimir los valores
 void odd(int arreglo[], int N){  //Esta función no tiene que retornar algo, solo cumplir la instrucción, por lo que es tipo void
   for(int i = 0; i < N; i++){
 
@@ -43,47 +43,48 @@ void odd(int arreglo[], int N){  //Esta función no tiene que retornar algo, sol
 
 int main(){
 
-//1.
+//1. Inicializar dos variables globales, una entera y una flotante
 
   int XX = 2;
   float YY = 2.5;
 
-//2.
+//2. Imprimir las variables
   cout <<"La primera variable tiene un valor de "<< XX <<" y la segunda tiene un valor de "<< YY <<"\n";
 
-//3.
+//3. Calcular e imprimir la división de las variables
   float division = YY/XX;
   cout <<"El resultado de la división es "<< division <<"\n";
 
-//4.
+//4. Generar un arreglo de 300 números enteros aleatorios entre 0 y 900
   srand(time(nullptr)); //semilla de aleatoriedad que cambia cada que ejecuto el código
 
   int N = 300;  //tamaño del arreglo que necesito
   int arreglo[N]; //creo un arreglo vacío del tamaño que requiero, en este caso 300
-
- for (int i = 0; i < N; i++){  //El primer término sirve para inicializar la variable, el segundo establece la condición, y el tercero suma en cada iteración
+   
+//5. Hacer una iteración para recorrer el arreglo e imprimir todos sus valores
+  for (int i = 0; i < N; i++){  //El primer término sirve para inicializar la variable, el segundo establece la condición, y el tercero suma en cada iteración
    arreglo[i] = rand() % 901;  //Con la función rand() y el módulo, se genera un valor entre 0 y 900
-//5.
+   
    cout << arreglo[i] <<"\n"; //imprimo mi arreglo con cada valor de i 
  }
-//6. 
-   cout << arreglo[5] <<"\n"; //imprimo el quinto elemento de mi arreglo (por fuera del for para que no haya problemas)
+ 
+//6. Imprimir el quinto número del arreglo
+  cout << "El quinto valor del arreglo es " <<arreglo[4] <<"\n"; //imprimo el quinto elemento de mi arreglo (por fuera del for para que no haya problemas)
 
-//7.
+//7. Obtener la longitud del arreglo e imprimirla
    int length = sizeof(arreglo) / sizeof(arreglo[0]); //La función sizeof() me retorna el tamaño ocupado en bytes de todo mi arreglo, para obtener el tamaño del arreg   lo como tal, debo dividir sobre un dato de este
 
    cout <<"El tamaño del arreglo es "<< length <<"\n";
 
-//9.
-
+//9. Llamar la función que eleva al exponente y meterle los valores indicados
    float mivarflotante = 17.5;
    int mivarentera = 5;
-   cout << pow_func(mivarflotante, mivarentera) <<"\n";  //Llamo a la función pow_fun desde la función main
+   cout << mivarflotante << " elevada a la " << mivarentera << " es: " << pow_func(mivarflotante, mivarentera) <<"\n";  //Llamo a la función pow_fun desde la función main
 
-//10.1
-   cout << minimum(arreglo, N) <<"\n"; //Tando a minimum como a odd les pongo los parámetros necesarios para que trabajen sobre mi arreglo previamente hecho
+//10.1 Imprime lo que retorna la función del mínimo con el arreglo
+   cout << "El mínimo del arreglo es " << minimum(arreglo, N) <<"\n"; //Tanto a minimum como a odd les pongo los parámetros necesarios para que trabajen sobre mi arreglo previamente hecho
 
-//11.1
+//11.1 Llamar a la función e introducirle el arreglo
    
    odd(arreglo, N);
    
