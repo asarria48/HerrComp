@@ -16,13 +16,13 @@ int main(){
   double h = 0.01;
   int n = tf/h;
   
-  int y[n];    //arreglo de tamaño n donde guardaré mis valores de y
-  int t[n];
-  
+  double y[n];    //arreglo de tamaño n donde guardaré mis valores de y
+  double t[n];
+
   t[0] = t0;
   y[0] = y0;
     
-  for(int i = 0; i < n; i++){
+  for(int i = 0; i < n ; i++){
 
     y[i+1] += y[i] + h*(f(y[i]));
     t[i+1] += t[i] + h;
@@ -30,7 +30,5 @@ int main(){
     cout << t[i] << " " << y[i] << "\n";
   }
 
-
-    
   return 0;
 }
