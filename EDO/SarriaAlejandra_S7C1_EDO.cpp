@@ -46,7 +46,7 @@ int main(){
     cout << t[i] << " " << y[i] << "\n";
   }
 
-  ofstream outFile("datosEuler.txt");
+  ofstream outFile("datosEuleryRK.txt");
   if(outFile.is_open()){
     for(int i = 0; i < n; i++){
       outFile << t[i] << " " << y[i] << "\n";
