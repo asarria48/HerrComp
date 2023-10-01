@@ -46,15 +46,15 @@ int main(){
     cout << t[i] << " " << y[i] << "\n";
   }
 
-  ofstream outFile("datosEuleryRK.txt");
-  if(outFile.is_open()){
-    for(int i = 0; i < n; i++){
-      outFile << t[i] << " " << y[i] << "\n";
-    }
+  ofstream outfile;
+  outfile.open("DatosLF.dat");
 
-    outFile.close();
-
+  outfile << t[0] << "," << y[0] << "\n";
+  for(int i = 0; i < n; i++){
+    outfile << t[i+1] << "," << y[i+1] << "\n";
   }
+
+  outfile.close();
 
   return 0;
 }
