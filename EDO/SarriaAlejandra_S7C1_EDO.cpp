@@ -32,6 +32,16 @@ int main(){
      cout << t[i] << " " << y[i] << "\n";
   }
 
+  ofstream outFile;
+  outFile.open("euler.dat");
+
+  outFile << t[0] << "," << y[0] << "\n";
+  for(int i = 0; i < n; i++){
+    outFile << t[i+1] << "," << y[i+1] << "\n";
+  }
+
+  outFile.close();
+
 
   for(int i = 0; i < n; i++){
 
@@ -47,7 +57,7 @@ int main(){
   }
 
   ofstream outfile;
-  outfile.open("DatosLF.dat");
+  outfile.open("leapfrog.dat");
 
   outfile << t[0] << "," << y[0] << "\n";
   for(int i = 0; i < n; i++){
