@@ -21,6 +21,7 @@ int main(){
   double h = 0.01;
   int n = tf/h;
   double v_med = v0 + 0.5*h*f(x0);
+  double k1x, k1v, k2x, k2v, k3x, k3v, k4x, k4v;
 
   double x[n];
   double v[n];
@@ -69,6 +70,35 @@ int main(){
   outFile << t[i+1] << "," << x[i+1] << "\n";
   }
 
+  for(int i = 0; i < n; i++){
+
+    k1x = h*f(x[i]);
+    k1v = h*f(v[i]);
+    k2x = h*f(x[i] + (k1x/2));
+    k2v = h*f(v[i] + (k1v/2));
+    k3x = h*f(x[i] + (k2x/2));
+    k3v = h*f(v[i] + (k2v/2));
+    k4x = h*f(x[i] + k3x);
+    k4v = h*f(v[i] + k3v);
+
+    x[i+1] = x[i] + (1/6)*(k1x + 2*k2x + 2*k3x + k4x);
+    v[i+1] = v[i] + (1/6)*(k1v + 2*k2v + 2*k3v + k4v);
+
+    t[i+1] = t[i] + h;
+
+    cout << t[i] << " " << x[i] << "\n";
+    //cout << t[i] << " " << v[i] << "\n";
+
+  }
+
+  ofstream Outfile;
+  Outfile.open("RK2.dat");
+
+  Outfile << t[0] << "," << x[0] << "\n";
+  for(int i = 0; i < n; i++){
+  Outfile << t[i+1] << "," << x[i+1] << "\n";
+  }
+  
   
   return 0; 
 }
