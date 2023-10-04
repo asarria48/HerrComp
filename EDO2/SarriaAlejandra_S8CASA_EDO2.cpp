@@ -20,6 +20,7 @@ int main(){
   double tf = 2.0;
   double h = 0.01;
   int n = tf/h;
+  double v_med = v0 + 0.5*h*f(x0);
 
   double x[n];
   double v[n];
@@ -48,5 +49,26 @@ int main(){
 
   outfile.close();
 
+  v[0] = v_med;
+
+  for(int i = 0; i < n; i++){
+
+    v[i+1] = v[i] + h*f(x[i+1]);
+    x[i+1] = x[i] + h*v[i];
+    t[i+1] = t[i] + h;
+
+    cout << t[i] << " " << x[i] << "\n";
+
+  }
+
+    ofstream outFile;
+  outFile.open("leapfrog2.dat");
+
+  outFile << t[0] << "," << x[0] << "\n";
+  for(int i = 0; i < n; i++){
+  outFile << t[i+1] << "," << x[i+1] << "\n";
+  }
+
+  
   return 0; 
 }
