@@ -16,30 +16,34 @@ int main(){
 
   double x0 = 0.1;
   double v0 = 0.0;
+  double t0 = 0.0;
   double tf = 2.0;
   double h = 0.01;
   int n = tf/h;
 
   double x[n];
   double v[n];
+  double t[n];
 
   v[0] = v0;
   x[0] = x0;
+  t[0] = t0;
 
   for(int i = 0; i < n - 1; i++){
 
     v[i+1] = v[i] + h*f(x[i]);
     x[i+1] = x[i] + h*v[i];
+    t[i+1] = t[i] + h;
 
-    cout << v[i] << " "  << x[i] << "\n";
+    cout << t[i] << " "  << x[i] << "\n";
   }
 
   ofstream outfile;
   outfile.open("euler2.dat");
 
-  outfile << v[0] << "," << x[0] << "\n";
+  outfile << t[0] << "," << x[0] << "\n";
   for(int i = 0; i < n; i++){
-  outfile << v[i+1] << "," << x[i+1] << "\n";
+  outfile << t[i+1] << "," << x[i+1] << "\n";
   }
 
   outfile.close();
