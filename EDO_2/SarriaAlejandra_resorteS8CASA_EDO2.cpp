@@ -107,9 +107,9 @@ int main(){
    ofstream Outfile;
   Outfile.open("rungekutta_2.dat");
 
-  Outfile << t[0] << " , " << x[0] << endl;
+  Outfile << v[0] << " , " << x[0] << endl;
   for(int i = 0; i < n; i++){
-    Outfile << t[i+1] << " , " << x[i+1] << endl;
+    Outfile << v[i+1] << " , " << x[i+1] << endl;
   }
 
   Outfile.close();
