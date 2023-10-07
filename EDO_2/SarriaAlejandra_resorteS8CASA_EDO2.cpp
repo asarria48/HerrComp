@@ -90,26 +90,29 @@ int main(){
 
   for(int i = 0; i < n; i++){
 
-    k1x = f(t[i],x[i]);
-    k1v = f(t[i],v[i]);
-    k2x = f(t[i] + h/2 , x[i] + (h/2)*k1x);
-    k2v = f(t[i] + h/2 , v[i] + (h/2)*k1v);
-    k3x = f(t[i] + h/2 , x[i] + (h/2)*k2x);
-    k3v = f(t[i] + h/2 , v[i] + (h/2)*k2v);
-    k4x = f(t[i] + h , x[i] + h*k3x);
-    k4v = f(t[i] + h , v[i] + h*k3v);
+    k1x = h*v[i];
+    k1v = h*f(t[i],x[i]);
+    
+    k2x = h*(v[i] + k1v/2);
+    k2v = h*f(t[i] + h/2 , v[i] + k1v/2);
+    
+    k3x = h*(v[i] + k2v/2);
+    k3v = h*f(t[i] + h/2 , v[i] + k2v/2);
+    
+    k4x = h*(v[i] + k3v/2);
+    k4v = f(t[i] + h , v[i] + k3v);
 
-    x[i+1] = x[i] + h*(k1x + 2*k2x + 2*k3x + k4x)/6;
-    v[i+1] = v[i] + h*(k1v + 2*k2v + 2*k3v + k4v)/6;
+    x[i+1] = x[i] + (k1x + 2*k2x + 2*k3x + k4x)/6;
+    v[i+1] = v[i] + (k1v + 2*k2v + 2*k3v + k4v)/6;
     t[i+1] = t[i] + h;
   }
 
    ofstream Outfile;
   Outfile.open("rungekutta_2.dat");
 
-  Outfile << v[0] << " , " << x[0] << endl;
+  Outfile << t[0] << " , " << x[0] << endl;
   for(int i = 0; i < n; i++){
-    Outfile << v[i+1] << " , " << x[i+1] << endl;
+    Outfile << t[i+1] << " , " << x[i+1] << endl;
   }
 
   Outfile.close();
