@@ -6,6 +6,7 @@ using namespace std;
 
 const double m = 0.2;
 const double k = 50.0;
+const double b = 0.08;
 
 double f(double t, double x){
 
@@ -17,9 +18,14 @@ double F(double t, double x, double v){
   return -k*x/m;
 }
 
-double s(double t){
+double ana(double t){
 
   return 0.1*cos(sqrt(k/m)*t);
+}
+
+double fun(double t, double x, double v){
+
+  return -k*x/m -b*v;
 }
 
 int main(){
@@ -121,6 +127,61 @@ int main(){
   }
 
   Outfile.close();
+
+  x[0] = x0;
+  v[0] = v0;
+  t[0] = t0;
+
+  for(int i = 0; i < n; i++){
+
+    x[i+1] = x[i] + h*v[i];
+    v[i+1] = v[i] + h*fun(t[i],x[i], v[i]);
+    t[i+1] = t[i] + h;
+
+  }
+
+  ofstream outfiLe;
+  outfiLe.open("euleramor.dat");
+
+  outfiLe << t[0] << " , " << x[0] << endl;
+  for(int i = 0; i < n; i++){
+    outfiLe << t[i+1] << " , " << x[i+1] << endl;
+  }
+
+  outfiLe.close();
+
+  
+  t[0] = t0;
+  x[0] = x0;
+  v[0] = v0;
+
+  for(int i = 0; i < n; i++){
+
+    k1x = h*v[i];
+    k1v = h*fun(t[i], x[i], v[i]);
+    
+    k2x = h*(v[i] + k1v/2);
+    k2v = h*fun(t[i] + h/2 , x[i] + k1x/2 , v[i] + k1v/2);
+    
+    k3x = h*(v[i] + k2v/2);
+    k3v = h*fun(t[i] + h/2 , x[i] + k2x/2, v[i] + k2v/2);
+    
+    k4x = h*(v[i] + k3v);
+    k4v = fun(t[i] + h , x[i] + k3x , v[i] + k3v);
+
+    x[i+1] = x[i] + (k1x + 2*k2x + 2*k3x + k4x)/6;
+    v[i+1] = v[i] + (k1v + 2*k2v + 2*k3v + k4v)/6;
+    t[i+1] = t[i] + h;
+  }
+
+   ofstream OutfIle;
+  OutfIle.open("rungekuttaamor.dat");
+
+  OutfIle << t[0] << " , " << x[0] << endl;
+  for(int i = 0; i < n; i++){
+    OutfIle << t[i+1] << " , " << x[i+1] << endl;
+  }
+  
 
   return 0;
 }
