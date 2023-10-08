@@ -12,6 +12,11 @@ double f(double t, double x){
   return -k*x/m;
 }
 
+double F(double t, double x, double v){
+
+  return -k*x/m;
+}
+
 double s(double t){
 
   return 0.1*cos(sqrt(k/m)*t);
@@ -91,16 +96,16 @@ int main(){
   for(int i = 0; i < n; i++){
 
     k1x = h*v[i];
-    k1v = h*f(t[i],x[i]);
+    k1v = h*F(t[i], x[i], v[i]);
     
     k2x = h*(v[i] + k1v/2);
-    k2v = h*f(t[i] + h/2 , v[i] + k1v/2);
+    k2v = h*F(t[i] + h/2 , x[i] + k1x/2 , v[i] + k1v/2);
     
     k3x = h*(v[i] + k2v/2);
-    k3v = h*f(t[i] + h/2 , v[i] + k2v/2);
+    k3v = h*F(t[i] + h/2 , x[i] + k2x/2, v[i] + k2v/2);
     
-    k4x = h*(v[i] + k3v/2);
-    k4v = f(t[i] + h , v[i] + k3v);
+    k4x = h*(v[i] + k3v);
+    k4v = F(t[i] + h , x[i] + k3x , v[i] + k3v);
 
     x[i+1] = x[i] + (k1x + 2*k2x + 2*k3x + k4x)/6;
     v[i+1] = v[i] + (k1v + 2*k2v + 2*k3v + k4v)/6;
