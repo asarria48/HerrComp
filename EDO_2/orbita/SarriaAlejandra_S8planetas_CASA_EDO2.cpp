@@ -53,8 +53,6 @@ int main(){
 
     cout << i+1 << " " << sqrt(x*x + y*y + z*z) << endl;
 
-  }
-
   ofstream outfile("planetasEuler.dat");
 
   for(int i = 0; i < n; i++){
@@ -62,6 +60,10 @@ int main(){
   }
   
   outfile.close();
+
+  }
+
+
 
   return 0;
 }
