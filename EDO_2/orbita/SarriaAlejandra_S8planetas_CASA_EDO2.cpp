@@ -37,7 +37,7 @@ int main(){
   double y = 0.0;
   double z = 0.0;
   
-  double r = sqrt(x+x + y*y + z*z);  //distancia inicial entre la Tierra y el Sol 
+  double r = sqrt(x*x + y*y + z*z);  //distancia inicial entre la Tierra y el Sol 
   double f = (G*ms*mt)/(r*r);        //Fuerza de gravedad inicial entre la Tierra y el Sol
 
   double vx = 0.0;
@@ -50,13 +50,13 @@ int main(){
 
   int n = 365*24;                    //Un año en horas
 
-  outfile << 0.0 << " , " << x << " , " << y << endl;
+  outfile << 0.0 << " , " << sqrt(x*x + y*y + z*z) << endl;
   
   for(int i = 0; i < n; i++){
 
     Euler(x, y, z, vx, vy, vz, dt);
     
-    outfile << i+1 << " , " << x << " , " << y << endl;
+    outfile << i+1 << " , " << sqrt(x*x + y*y + z*z) << endl;
   
   }
 
