@@ -51,15 +51,10 @@ int main(){
 
     Euler(x, y, z, vx, vy, vz, dt);
 
-    cout << i+1 << " " << sqrt(x*x + y*y + z*z) << endl;
+    ofstream outfile("planetasEuler.dat");
+    
+    outfile << i+1 << " , " << sqrt(x*x + y*y + z*z) << endl;
   
-  }
-
-  ofstream outfile("planetasEuler.dat");
-  
-  for (int i = 0; i < n; i++){
-  outfile << i+1 << " , " << sqrt(x*x + y*y + z*z) << endl;
-  outfile.flush();
   }
 
   return 0;
