@@ -50,13 +50,13 @@ int main(){
 
   int n = 365*24;                    //Un año en horas
 
-  outfile << 0.0 << " , " << sqrt(x*x + y*y + z*z) << endl;
+  outfile << 0.0 << " , " << x << " , " << y << endl;
   
   for(int i = 0; i < n; i++){
 
     Euler(x, y, z, vx, vy, vz, dt);
     
-    outfile << i+1 << " , " << sqrt(x*x + y*y + z*z) << endl;
+    outfile << i+1 << " , " << x << " , " << y << endl;
   
   }
 
