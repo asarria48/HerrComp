@@ -1,17 +1,23 @@
 #include <iostream>
 #include <fstream>
 #include <cmath>
+#include <cstdlib>
+#include <math.h>
+#include <stdio.h>
 
 using namespace std;
 
-const double G = 6.67430e-11;    //Constante gravitacional (m^3/kg*s^2)
-const double ms = 1.989e30;      //Masa del Sol (kg)
-const double mt = 5.972e24;      //Masa de la Tierra (kg)
+const double s = 1.0/3.1556925e7;
+const double m = 1.0/1.495978707e11;
+const double kg = 1.0/1.9885e30;
+const double G = (6.67430e-11)*m*m*m/(kg*s*s);    //Constante gravitacional (m^3/kg*s^2)
+const double ms = 1.0;      //Masa del Sol (kg)
+const double mt = 1.0/332946.0;      //Masa de la Tierra (kg)
 
 double fx(double t, double x, double y){    //Función para resolver la ecuación de la órbita en x. Mi compañero Juan Diego Parales me ayudó a llegar a las ecuaciones 
                                             //que debo resolver
   return -(G*x)/pow(x*x + y*y , 3/2);
-}
+}  
 
 double fy(double t, double x, double y){    //Función para resolver la ecuación de la órbita en y
 
@@ -20,23 +26,25 @@ double fy(double t, double x, double y){    //Función para resolver la ecuació
 
 
 int main(){
-
-  double x0 = 1.475e11;           //Distancia entre la Tierra y el Sol en el perihelio
+  
+  double x0 = 0.9833;           //Distancia entre la Tierra y el Sol en el perihelio
   double y0 = 0.0;           
 
   double vx0 = 0.0;
-  double vy0 = 3.075e4;           //Velocidad de la Tierra en el perihelio
+  double vy0 = 30.3*1000*m/s;           //Velocidad de la Tierra en el perihelio
 
   double t0 = 0.0;
-  double tf = 3.154e7;            //Un año en segundos
+  double tf = 5.0;            //Un año en segundos
 
-  double h = 0.001;
+  double h = 0.0001;
   
   int n = tf/h;
 
-  double x[n], y[n];
-  double vx[n], vy[n];
-  double t[n];
+  double x[n+1];
+  double y[n+1];
+  double vx[n+1];
+  double vy[n+1];
+  double t[n+1];
 
   x[0] = x0;
   y[0] = y0;
@@ -48,12 +56,13 @@ int main(){
 
   for(int i = 0; i < n; i++){
 
+
     x[i+1] = x[i] + h*vx[i];
     y[i+1] = y[i] + h*vy[i];
-
+ 
     vx[i+1] = vx[i] + h*fx(t[i], x[i], y[i]);
     vy[i+1] = vy[i] + h*fy(t[i], x[i], y[i]);
-    
+
     t[i+1] = t[i] + h;
     
   }
@@ -62,10 +71,12 @@ int main(){
   outfile.open("EulerPlanetas.dat");
 
   outfile << t[0] << " , " << x[0] << " , " << y[0] << endl;
-  
+
   for(int i = 0; i < n; i++){
+
     outfile << t[i+1] << " , " << x[i+1] << " , " << y[i+1] << endl;
   }
+  
 
   outfile.close();
 
