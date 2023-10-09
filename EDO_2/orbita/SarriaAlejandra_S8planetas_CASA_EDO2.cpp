@@ -30,6 +30,9 @@ void Euler(double& x,double& y, double& z, double& vx, double& vy, double& vz, d
   
 int main(){
 
+  ofstream outfile;
+  outfile.open("planetasEuler.dat");
+
   double x = 1.475e11;               //Distancia entre la Tierra y el Sol en el perihelio (m) (distancia inicial)
   double y = 0.0;
   double z = 0.0;
@@ -46,16 +49,18 @@ int main(){
   double dt = 3600.0;                //Paso del tiempo (s) (una hora)
 
   int n = 365*24;                    //Un año en horas
+
+  outfile << 0.0 << " , " << sqrt(x*x + y*y + z*z) << endl;
   
   for(int i = 0; i < n; i++){
 
     Euler(x, y, z, vx, vy, vz, dt);
-
-    ofstream outfile("planetasEuler.dat");
     
     outfile << i+1 << " , " << sqrt(x*x + y*y + z*z) << endl;
   
   }
+
+  outfile.close();
 
   return 0;
 }
