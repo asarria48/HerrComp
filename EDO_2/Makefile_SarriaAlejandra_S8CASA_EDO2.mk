@@ -1,3 +1,4 @@
+all: pdf
 
 pdf: SarriaAlejandra_RESULTADOS_S8CASA_EDO2.tex euler leapfrog rungekutta eulerorbita leapfrogorbita
 	latex SarriaAlejandra_RESULTADOS_S8CASA_EDO2.tex
@@ -16,6 +17,14 @@ eulerorbita: EulerPlanetas.dat PLOTS_SarriaAlejandra_S8planetasCASA_EDO2.py
 
 leapfrogorbita: LeapfrogPlanetas.dat PLOTS_SarriaAlejandra_S8planetasCASA_EDO2.py
 	python PLOTS_SarriaAlejandra_S8planetasCASA_EDO2.py
+
+EulerPlanetas.dat: SarriaAlejandra_S8planetasCASA_EDO2.cpp
+	g++ SarriaAlejandra_S8planetasCASA_EDO2.cpp
+	./SarriaAlejandra_S8planetasCASA_EDO2.cpp
+
+LeapfrogPlanetas.dat: SarriaAlejandra_S8planetasCASA_EDO2.cpp
+	g++ SarriaAlejandra_S8planetasCASA_EDO2.cpp
+	./SarriaAlejandra_S8planetasCASA_EDO2.cpp
 
 euler_2.dat: SarriaAlejandra_resorteS8CASA_EDO2.cpp
 	g++ SarriaAlejandra_resorteS8CASA_EDO2.cpp
