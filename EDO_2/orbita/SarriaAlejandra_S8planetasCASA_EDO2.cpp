@@ -103,8 +103,8 @@ int main(){
     x[i+1] = x[i] + h*vx[i];
     y[i+1] = y[i] + h*vy[i];
 
-    vx[i+1] = vx[i] + fx(t[i+1], x[i+1], y[i+1]);
-    vy[i+1] = vy[i] + fy(t[i+1], x[i+1], y[i+1]);
+    vx[i+1] = vx[i] + h*fx(t[i+1], x[i+1], y[i+1]);
+    vy[i+1] = vy[i] + h*fy(t[i+1], x[i+1], y[i+1]);
 
     t[i+1] = t[i] + h;
     
