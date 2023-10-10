@@ -39,7 +39,7 @@ int main(){
   double vy0 = 30750*m/s;              //Velocidad de la Tierra en el perihelio (pasándolo a las unidades que estoy usando)
 
   double t0 = 0.0;
-  double tf = 1.0;                     //Tiempo de un año
+  double tf = 2.0;                     //Tiempo en años
   
   double h = 0.001;
   
