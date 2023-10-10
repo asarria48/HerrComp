@@ -42,10 +42,14 @@ int main(){
   double v[n];
   double t[n];
 
+
+  // EULER:
+  
   x[0] = x0;
   v[0] = v0;
   t[0] = t0;
 
+  
   for(int i = 0; i < n; i++){
 
     x[i+1] = x[i] + h*v[i];
@@ -53,9 +57,6 @@ int main(){
     t[i+1] = t[i] + h;
 
   }
-
-
-  //cout << abs((f(t[0],x[0]) - s(t[0]))/s(t[0])) << endl;
 
 
   ofstream outfile;
@@ -67,7 +68,9 @@ int main(){
   }
 
   outfile.close();
-  
+
+
+  // LEAPFROG:
 
   v[0] = v0 + 0.5*h*f(t[0],x[0]);
   
@@ -79,7 +82,6 @@ int main(){
 
   }
 
-  //cout << abs((f(t[0],x[0]) - s(t[0]))/s(t[0])) << endl;
 
     ofstream outFile;
   outFile.open("leapfrog_2.dat");
@@ -90,6 +92,9 @@ int main(){
   }
 
   outFile.close();
+
+
+  // RUNGE KUTTA:
 
   
   double k1x, k2x, k3x, k4x;
@@ -128,6 +133,8 @@ int main(){
 
   Outfile.close();
 
+  // EULER AMORTIGUADO:
+
   x[0] = x0;
   v[0] = v0;
   t[0] = t0;
@@ -149,6 +156,8 @@ int main(){
   }
 
   outfiLe.close();
+
+  //RUNGE KUTTA AMORTIGUADO:
 
   
   t[0] = t0;
