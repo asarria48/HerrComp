@@ -111,9 +111,9 @@ int main(){
   }
 
   ofstream Outfile;
-  outfile.open("LeapfrogPlanetas.dat");
+  Outfile.open("LeapfrogPlanetas.dat");
 
-  outfile << t[0] << " , " << x[0] << " , " << y[0] << endl;
+  Outfile << t[0] << " , " << x[0] << " , " << y[0] << endl;
 
   for(int i = 0; i < n; i++){
 
