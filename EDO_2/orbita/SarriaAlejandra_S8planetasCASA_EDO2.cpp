@@ -1,0 +1,90 @@
+#include <iostream>
+#include <fstream>
+#include <cmath>
+#include <cstdlib>
+#include <math.h>
+#include <stdio.h>
+
+using namespace std;
+
+//Para este ejercicio llevaré las unidades a algo que me convenga
+
+const double ms = 1.0;              //La masa del Sol será la unidad
+const double mt = 1.0/328900.56;    //Lo que es la masa de la Tierra proporcional a la del Sol
+const double kg = 1.0/1.9891e30;    //Lo que significa un kilogramo respecto a la masa del Sol
+
+const double m = 6.68459e-12;       //Metros en una unidad astronómica (distancia entre la Tierra y el Sol)
+
+const double s = 3.17098e-8;        //Segundos en un año
+
+const double G = (6.67428e-11)*m*m*m/(kg*s*s);    //Constante gravitacional (m^3/kg*s^2)
+
+double fx(double t, double x, double y){    //Función para resolver la ecuación de la órbita en x. Mi compañero Juan Diego Parales me ayudó a llegar a las ecuaciones 
+                                            //que debo resolver
+  return -(G*x)/pow(x*x + y*y , 3/2);
+}  
+
+double fy(double t, double x, double y){    //Función para resolver la ecuación de la órbita en y
+
+  return -(G*y)/pow(x*x + y*y , 3/2);
+}
+
+
+int main(){
+  
+  double x0 = 0.9833;           //Distancia entre la Tierra y el Sol en el perihelio
+  double y0 = 0.0;           
+    
+  double vx0 = 0.0;
+  double vy0 = 30.3*1000*m/s;           //Velocidad de la Tierra en el perihelio
+
+  double t0 = 0.0;
+  double tf = 5.0;            //Un año en segundos
+  
+  double h = 0.0001;
+  
+  int n = tf/h;
+
+  double x[n];
+  double y[n];
+  double vx[n];
+  double vy[n];
+  double t[n];
+
+  x[0] = x0;
+  y[0] = y0;
+
+  vx[0] = vx0;
+  vy[0] = vy0;
+
+  t[0] = t0;
+
+  for(int i = 0; i < n; i++){
+
+
+    x[i+1] = x[i] + h*vx[i];
+    y[i+1] = y[i] + h*vy[i];
+ 
+    vx[i+1] = vx[i] + h*fx(t[i], x[i], y[i]);
+    vy[i+1] = vy[i] + h*fy(t[i], x[i], y[i]);
+
+    t[i+1] = t[i] + h;
+    
+  }
+
+  ofstream outfile;
+  outfile.open("EulerPlanetas.dat");
+
+  outfile << t[0] << " , " << x[0] << " , " << y[0] << endl;
+
+  for(int i = 0; i < n; i++){
+
+    outfile << t[i+1] << " , " << x[i+1] << " , " << y[i+1] << endl;
+  }
+  
+
+  outfile.close();
+
+
+  return 0;
+}
